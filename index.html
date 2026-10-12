@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Outbox Records</title>
+  <meta name="description" content="Outbox Records is an independent label for virtual artists. Songs made from the messages nobody sent.">
+  <meta property="og:title" content="Outbox Records">
+  <meta property="og:description" content="An independent label for virtual artists. Songs made from the messages nobody sent.">
+  <meta property="og:image" content="https://outboxrecords.com/assets/ivy-static.jpg">
+  <meta property="og:url" content="https://outboxrecords.com/">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #111114;
+      --ink-2: #1a1a1f;
+      --line: #2a2a31;
+      --paper: #f2efe8;
+      --muted: #9b98a3;
+      --amber: #ffb454;
+      --violet: #8a4fff;
+      --max: 1080px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--ink);
+      color: var(--paper);
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+    .mono { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+
+    header { border-bottom: 1px solid var(--line); }
+    header .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; font-size: .95rem; }
+    .brand img { width: 30px; height: 30px; }
+    nav a { text-decoration: none; color: var(--muted); margin-left: 24px; font-size: .92rem; }
+    nav a:hover { color: var(--paper); }
+
+    .hero { padding: 120px 0 104px; border-bottom: 1px solid var(--line); }
+    .hero h1 { font-size: clamp(2.6rem, 7vw, 5.4rem); line-height: 1.02; font-weight: 700; letter-spacing: -.03em; max-width: 14ch; margin: 20px 0 28px; }
+    .hero h1 em { font-style: normal; color: var(--amber); }
+    .hero p { max-width: 52ch; color: var(--muted); font-size: 1.12rem; }
+
+    section { padding: 96px 0; border-bottom: 1px solid var(--line); }
+    .section-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 40px; gap: 16px; }
+    h2 { font-size: clamp(1.6rem, 3.4vw, 2.2rem); letter-spacing: -.02em; font-weight: 700; }
+
+    .artist { display: grid; grid-template-columns: minmax(0, 420px) 1fr; gap: 48px; align-items: center; background: var(--ink-2); border: 1px solid var(--line); border-radius: 18px; padding: 24px; }
+    .artist img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; display: block; }
+    .artist h3 { font-size: clamp(2rem, 4.5vw, 3.2rem); letter-spacing: -.03em; line-height: 1; margin: 12px 0 16px; }
+    .artist h3 span { color: var(--violet); }
+    .artist p { color: var(--muted); max-width: 46ch; margin-bottom: 20px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .tag { border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; font-size: .82rem; color: var(--paper); }
+    .release { border-top: 1px solid var(--line); padding-top: 20px; }
+    .release strong { display: block; font-size: 1.15rem; margin-top: 6px; }
+    .slot { margin-top: 20px; border: 1px dashed var(--line); border-radius: 18px; padding: 28px 24px; color: var(--muted); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+    .about { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+    .about p { color: var(--muted); margin-bottom: 16px; }
+    .about p strong { color: var(--paper); font-weight: 500; }
+
+    .contact-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+    .contact-card { display: block; text-decoration: none; background: var(--ink-2); border: 1px solid var(--line); border-radius: 14px; padding: 24px; transition: border-color .2s; }
+    .contact-card:hover { border-color: var(--amber); }
+    .contact-card .addr { display: block; font-size: 1.1rem; margin-top: 10px; word-break: break-all; }
+
+    footer { padding: 40px 0 56px; }
+    footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+    @media (max-width: 760px) {
+      nav { display: none; }
+      .hero { padding: 80px 0 72px; }
+      section { padding: 72px 0; }
+      .artist, .about { grid-template-columns: 1fr; gap: 28px; }
+      .wrap { padding: 0 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <a class="brand" href="#"><img src="assets/logo-mark.svg" alt="">Outbox Records</a>
+      <nav>
+        <a href="#artists">Artists</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div class="wrap">
+        <span class="mono">Independent label · Est. 2026</span>
+        <h1>Songs from the messages <em>nobody sent.</em></h1>
+        <p>Outbox Records is a home for virtual artists. Each one has a world, a sound and a story, and every song starts with something left unsaid.</p>
+      </div>
+    </div>
+
+    <section id="artists">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Artists</h2>
+          <span class="mono">01 / roster</span>
+        </div>
+
+        <article class="artist">
+          <img src="assets/ivy-static.jpg" alt="Ivy Static, a virtual singer with black hair, a glowing violet streak and silver headphones" width="800" height="800">
+          <div>
+            <span class="mono">Signal found on 103.7 FM</span>
+            <h3>Ivy <span>Static</span></h3>
+            <p>A virtual singer born in the noise between two radio stations at 3 a.m. She turns the messages people never sent into late-night pop and R&amp;B.</p>
+            <div class="tags">
+              <span class="tag">Pop</span>
+              <span class="tag">Alt R&amp;B</span>
+              <span class="tag">Late night</span>
+            </div>
+            <div class="release">
+              <span class="mono">Debut EP · coming soon</span>
+              <strong>Still On</strong>
+            </div>
+          </div>
+        </article>
+
+        <div class="slot">
+          <span>Next signal</span>
+          <span class="mono">Artist 02 · in development</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap about">
+        <div>
+          <span class="mono">02 / about</span>
+          <h2 style="margin-top:12px">Virtual artists, real feelings.</h2>
+        </div>
+        <div>
+          <p><strong>Our artists are virtual characters, and we say so.</strong> They are written, produced and directed by a small human team, with AI tools for voice, music and visuals.</p>
+          <p>The mystery is in the stories, never in what the artists are. We don't pretend they are real people, and we never imitate real artists.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Contact</h2>
+          <span class="mono">03 / outbox</span>
+        </div>
+        <div class="contact-list">
+          <a class="contact-card" href="mailto:contact@outboxrecords.com">
+            <span class="mono">General · press · partners</span>
+            <span class="addr">contact@outboxrecords.com</span>
+          </a>
+          <a class="contact-card" href="mailto:demos@outboxrecords.com">
+            <span class="mono">Collabs · sync · licensing</span>
+            <span class="addr">demos@outboxrecords.com</span>
+          </a>
+          <a class="contact-card" href="mailto:ivy@outboxrecords.com">
+            <span class="mono">Write to Ivy</span>
+            <span class="addr">ivy@outboxrecords.com</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span class="mono">© 2026 Outbox Records</span>
+      <span class="mono">Tell me what you never sent.</span>
+    </div>
+  </footer>
+</body>
+</html>
